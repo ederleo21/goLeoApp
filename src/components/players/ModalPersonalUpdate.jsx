@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { ModalUpdatePLayer } from './ModalUpdatePLayer'
+import { ModalUpdatePlayer } from './ModalUpdatePlayer';
 import { Field, Form, Formik, ErrorMessage } from 'formik' 
 import * as Yup from 'yup'
 import { Loading } from '../utils/Loading'
@@ -126,7 +126,7 @@ export const ModalPersonalUpdate = ({ isOpen, onClose, player, players }) => {
     if (loading) return <Loading/>;
 
     return (
-<ModalUpdatePLayer isOpen={isOpen} onClose={onClose} title="Datos personales">
+<ModalUpdatePlayer isOpen={isOpen} onClose={onClose} title="Datos personales">
   <Formik
     initialValues={initialValues}
     validationSchema={getValidationSchema(players, player.id)}
@@ -297,7 +297,7 @@ export const ModalPersonalUpdate = ({ isOpen, onClose, player, players }) => {
       </Form>
     )}
   </Formik>
-</ModalUpdatePLayer>
+</ModalUpdatePlayer>
     );
 };
 

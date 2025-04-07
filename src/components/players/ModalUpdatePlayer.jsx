@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const ModalUpdatePLayer = ({ isOpen, onClose, title, children }) => {
+export const ModalUpdatePlayer = ({ isOpen, onClose, title, children }) => {
 
     if (!isOpen) return null;
 
