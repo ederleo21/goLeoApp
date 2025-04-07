@@ -1,5 +1,5 @@
 import React from 'react'
-import { ModalUpdatePLayer } from './ModalUpdatePlayer'
+import { ModalUpdatePlayer } from './ModalUpdatePlayer'
 import { Formik, Form, ErrorMessage, Field } from 'formik'
 import * as Yup from "yup"
 import { updatePlayerSkillsData } from '../../api/playersApi'
@@ -35,7 +35,7 @@ export const ModalSkillsUpdate = ({ isOpen, onClose, skills, playerId }) => {
   };
 
   return (
-<ModalUpdatePLayer isOpen={isOpen} onClose={onClose} title="Habilidades">
+<ModalUpdatePlayer isOpen={isOpen} onClose={onClose} title="Habilidades">
   <Formik
     initialValues={skills}
     validationSchema={validationSchema}
@@ -79,7 +79,7 @@ export const ModalSkillsUpdate = ({ isOpen, onClose, skills, playerId }) => {
       </Form>
     )}
   </Formik>
-</ModalUpdatePLayer>
+</ModalUpdatePlayer>
 
   )
 }
