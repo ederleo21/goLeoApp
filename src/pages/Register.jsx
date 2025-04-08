@@ -17,21 +17,18 @@ export const Register = () => {
     .required("Confirmar la contraseña es requerido"),
     first_name: Yup.string().required("Nombre es requerido"),
     last_name: Yup.string().required("Apellido es requerido"),
-    email: Yup.string().email("Email invalido")
+    email: Yup.string().email("Email inválido")
   })
 
   const handleSubmit = async(values, { setSubmitting }) => {
     try{
       await api.post("/api/user/register/", values)
-      toast.success("Te registraste con éxito", {
-        position: 'top-right',
-        duration: 3000
-      })
-      navigate("/login")
+      navigate("/login");
+      toast.success("Registro exitoso");
     }catch(error){
-      console.log("Error en el registro:", error)
+      toast.error("Error en el registo, intenta de nuevo.")
     }
-    setSubmitting(false)
+    setSubmitting(false);
   }
 
   return (

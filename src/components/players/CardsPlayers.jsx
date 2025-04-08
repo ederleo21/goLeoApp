@@ -98,17 +98,11 @@ export const CardsPlayers = () => {
     );
   }
 
-  if (loading){
-    return(
-        <Loading/>
-    )
-  }
+  if (loading || status === 'loading') return <Loading/>
+  if(error) return <ErrorMessage message={`Error: ${error}`} />
 
   return (
       <div className="p-4 font-[Poppins] flex flex-col items-center">
-        {status === 'loading' && <Loading />}
-        {error && <ErrorMessage message={`Error: ${error}`} />}
-    
         {selectedClub && (
           <div className="w-full flex flex-wrap items-center justify-center gap-4 mb-4">
             { user.permissions.add_player &&

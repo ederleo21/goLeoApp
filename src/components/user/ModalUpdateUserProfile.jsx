@@ -12,6 +12,7 @@ export const ModalUpdateUserProfile = ({ user, onUpdateUser, onClose }) => {
     email: Yup.string().email("Email inválido").required("Requerido"),
     first_name: Yup.string().required("Requerido"),
     last_name: Yup.string().required("Requerido"),
+    dni: Yup.string().required("Ingresa tu dni"),
   })
 
   const initialValues = {
@@ -131,6 +132,7 @@ export const ModalUpdateUserProfile = ({ user, onUpdateUser, onClose }) => {
                 type="text"
                 className="mt-2 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo focus:border-indigo"
               />
+              <ErrorMessage name="dni" component="div" className="text-red-500 mt-2 text-sm" />
             </div>
 
             <div className="mb-2">
