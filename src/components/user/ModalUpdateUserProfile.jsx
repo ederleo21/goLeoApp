@@ -26,7 +26,7 @@ export const ModalUpdateUserProfile = ({ user, onUpdateUser, onClose }) => {
     phone: user.phone || "",
   }
 
-  const handleSubmit = async(values) => {
+  const handleSubmit = async(values, { setSubmitting }) => {
     try{
       const formData = new FormData();
       Object.keys(values).forEach(key => {
@@ -44,7 +44,8 @@ export const ModalUpdateUserProfile = ({ user, onUpdateUser, onClose }) => {
       onClose();
     }catch(err){
       toast.error("Ocurrió un error al enviar los datos.");
-      console.error("Error al actualizar el perfil:", err);
+    }finally{
+      setSubmitting(false);
     }
   }
 
@@ -57,7 +58,7 @@ export const ModalUpdateUserProfile = ({ user, onUpdateUser, onClose }) => {
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
-      {({ setFieldValue }) => (
+      {({ setFieldValue, isSubmitting }) => (
         <Form>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
             <div className="mb-2">
@@ -166,7 +167,8 @@ export const ModalUpdateUserProfile = ({ user, onUpdateUser, onClose }) => {
             </button>
             <button
               type="submit"
-              className="px-4 py-2 bg-indigo hover:bg-indigo_dark font-semibold text-white rounded transition-all"
+              className={`w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-white bg-indigo focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`} 
+              disabled={isSubmitting}
             >
               Guardar
             </button>
