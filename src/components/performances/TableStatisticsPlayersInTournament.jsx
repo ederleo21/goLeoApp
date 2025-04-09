@@ -70,11 +70,11 @@ export const TableStatisticsPlayersInTournament = ({ tournament, statsAllPlayers
                   {filterStatsPlayers.length > 0 ? (
                       filterStatsPlayers.map((player) => (
                           <tr class="border-b border-gray-300 dark:border-gray-600">
-                              <th scope="row" class="px-6 py-5 font-semibold text-gray-900 dark:text-white">{player.player}<span className='text-cyan-200 text-xs'> - {player.player_club_name}</span></th>
+                              <th scope="row" class="px-6 py-5 font-semibold text-gray-900 dark:text-white">{player.player}<span className='text-cyan-700 text-xs'> - {player.player_club_name}</span></th>
                               <td class="px-6 py-5">{player.goals_scored}</td>
                               <td class="px-6 py-5">{player.assists}</td>
                               <td class="px-6 py-5">
-                                  <button className='underline text-cyan-300 text-base'onClick={() => handleGetStatistic(player)}>Ver más</button>
+                                  <button className='underline text-cyan-700 font-semibold text-base'onClick={() => handleGetStatistic(player)}>Ver más</button>
                               </td>
                           </tr>
                       ))

@@ -51,7 +51,7 @@ export const StatisticCard = ({ player, title, subtitle, score }) => {
           isBestPlayer ? "bg-yellow-500 text-white" : "bg-gray-100 dark:bg-gray-900"
         }`}
       >
-        <p className="text-xs sm:text-sm font-medium text-white">{subtitle}</p>
+        <p className="text-xs sm:text-sm font-bold text-cyan-700">{subtitle}</p>
         {score && (
           <p
             className={`text-3xl sm:text-4xl font-extrabold mt-1 transition-transform duration-200 

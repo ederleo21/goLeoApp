@@ -25,10 +25,10 @@ const PlayerCard = ({ player, statType, index }) => {
                     {player.player_participation__player__first_name} <br /> {player.player_participation__player__last_name}
                 </h5>
                 <p className="text-sm text-gray-700 dark:text-gray-400 mb-3">
-                    <span className="font-bold text-semibold text-cyan-300">{player.player_participation__player__club__name}</span>
+                    <span className="font-bold text-semibold text-cyan-600">{player.player_participation__player__club__name}</span>
                 </p>
-                <p className="text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-400">
-                    {statLabels[statType]}: <span className="font-bold text-xl text-yellow-300">{player[`total_${statType}`]}</span>
+                <p className="text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-400 mb-2">
+                    {statLabels[statType]}: <span className="font-bold text-xl text-orange-600">{player[`total_${statType}`]}</span>
                 </p>
                 <NavLink to={`/players/player/${player.player_participation__player__id}`}>
                     <button className="mt-1 text-sm bg-gray-800 text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition">
