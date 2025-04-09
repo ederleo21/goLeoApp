@@ -18,7 +18,7 @@ const PlayerCard = ({ player, statType, index }) => {
             </div>
 
             <div className="w-full h-52 sm:h-48 md:h-48 lg:h-64 overflow-hidden rounded-t-xl">
-                <img className="w-full h-full object-cover" src={player.player_photo_url} alt="Player Photo" />
+                <img className="w-full h-full object-cover" src={player.player_photo_url.includes('default') ? player.player_participation__player__photo : player.player_photo_url} alt="Player Photo" />
             </div>
             <div className="p-3 flex flex-col flex-grow text-center">
                 <h5 className="mb-2 text-base font-bold tracking-tight text-gray-900 dark:text-white">

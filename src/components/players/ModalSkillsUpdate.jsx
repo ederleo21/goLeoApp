@@ -8,8 +8,8 @@ import { getPlayerById } from '../../api/playersApi'
 import toast from 'react-hot-toast'
 
 export const ModalSkillsUpdate = ({ isOpen, onClose, skills, playerId }) => {
-
   const dispatch = useDispatch()
+  if (!skills) return ;
 
   const validationSchema = Yup.object(
     Object.keys(skills).reduce((schema, skill) => {

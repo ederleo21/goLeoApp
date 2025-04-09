@@ -81,16 +81,18 @@ export const ProfilePlayer = ({ player }) => {
         </button>
         }
       </div>
-      <ul className={`grid grid-cols-1 ${Object.entries(player.skills).length === 1 ? 'max-w-sm mx-auto' : 'sm:grid-cols-2'} gap-4 list-none text-lg`}>
-        {Object.entries(player.skills).map(([skill, value]) => (
-          <li key={skill} className={`p-4 rounded-lg shadow-lg text-white ${getColor(value)} flex flex-col justify-between`}>
-            <div className="flex justify-between items-center">
-              <span className="font-semibold">{skill.charAt(0).toUpperCase() + skill.slice(1)}</span>
-              <strong className="ml-2">{value}</strong>
-            </div>
-          </li>
-        ))}
-      </ul>
+      {player?.skills && (
+        <ul className={`grid grid-cols-1 ${Object.entries(player.skills).length === 1 ? 'max-w-sm mx-auto' : 'sm:grid-cols-2'} gap-4 list-none text-lg`}>
+          {Object.entries(player.skills).map(([skill, value]) => (
+            <li key={skill} className={`p-4 rounded-lg shadow-lg text-white ${getColor(value)} flex flex-col justify-between`}>
+              <div className="flex justify-between items-center">
+                <span className="font-semibold">{skill.charAt(0).toUpperCase() + skill.slice(1)}</span>
+                <strong className="ml-2">{value}</strong>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   </div>
 

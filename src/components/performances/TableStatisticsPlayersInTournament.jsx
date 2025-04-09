@@ -8,6 +8,7 @@ export const TableStatisticsPlayersInTournament = ({ tournament, statsAllPlayers
   const [filterClub, setFilterClub] = useState("");
   const [statisticPlayer, setStatisticPlayer] = useState({});
   const [isModalStatistics, setIsModalStatistics] = useState(false);
+  const [loadingPlayerId, setLoadingPlayerId] = useState(null);
 
   let filterStatsPlayers = statsAllPlayers.filter((player) => {
       const playerName = filterName ? player.player.toLowerCase().includes(filterName.trim().toLowerCase()) : player
@@ -17,11 +18,14 @@ export const TableStatisticsPlayersInTournament = ({ tournament, statsAllPlayers
 
   const handleGetStatistic = async(player) => {
     try{
+      setLoadingPlayerId(player.player_id);
       const res = await api.get(`/performance/statisticsPlayerInTournament/${player.player_id}/${tournament.id}/`);
       setStatisticPlayer(res.data);
       setIsModalStatistics(true);
     }catch(error){
       toast.error("Error en traer los datos, intente más tarde: " + error.message)
+    }finally{
+      setLoadingPlayerId(null);
     }
   }
 
@@ -71,10 +75,12 @@ export const TableStatisticsPlayersInTournament = ({ tournament, statsAllPlayers
                       filterStatsPlayers.map((player) => (
                           <tr class="border-b border-gray-300 dark:border-gray-600">
                               <th scope="row" class="px-6 py-5 font-semibold text-gray-900 dark:text-white">{player.player}<span className='text-cyan-700 text-xs'> - {player.player_club_name}</span></th>
-                              <td class="px-6 py-5">{player.goals_scored}</td>
-                              <td class="px-6 py-5">{player.assists}</td>
+                              <td class="px-6 py-5 font-semibold">{player.goals_scored}</td>
+                              <td class="px-6 py-5 font-semibold">{player.assists}</td>
                               <td class="px-6 py-5">
-                                  <button className='underline text-cyan-700 font-semibold text-base'onClick={() => handleGetStatistic(player)}>Ver más</button>
+                                  <button className={`text-cyan-700 font-bold text-base hover:text-indigo_dark hover:underline ${loadingPlayerId === player.player_id && "text-indigo_dark"}`}
+                                  onClick={() => handleGetStatistic(player)}
+                                  >{loadingPlayerId === player.player_id ? "Cargando..." : "Obtener más"}</button>
                               </td>
                           </tr>
                       ))
