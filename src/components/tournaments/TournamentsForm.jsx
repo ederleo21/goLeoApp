@@ -107,7 +107,7 @@ export const TournamentsForm = () => {
   };
 
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values, { setSubmitting }) => {
     try {
       const {
         points_system,
@@ -161,6 +161,8 @@ export const TournamentsForm = () => {
     } catch (error) {
       console.error("Error al crear el torneo:", error.message);
       toast.error("Error al crear el torneo: " + error.message);
+    }finally{
+      setSubmitting(false);
     }
   };
 
@@ -176,7 +178,7 @@ export const TournamentsForm = () => {
           validationSchema={getValidationSchema(typeSelected)}
           onSubmit={handleSubmit}
         >
-          {({ values, setFieldValue }) => (
+          {({ values, setFieldValue, isSubmitting }) => (
             <Form className="space-y-6">
               <div>
                 <FormField
@@ -350,7 +352,8 @@ export const TournamentsForm = () => {
               <div>
                 <button
                   type="submit"
-                  className="w-full bg-indigo text-white font-semibold py-2 rounded-md hover:bg-indigo_dark transition duration-300"
+                  className={`w-full bg-indigo text-white font-semibold py-2 rounded-md hover:bg-indigo_dark transition duration-300 ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  disabled={isSubmitting}
                 >
                   Crear Torneo
                 </button>

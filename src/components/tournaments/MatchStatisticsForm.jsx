@@ -50,7 +50,7 @@ export const MatchStatisticsForm = ({ matchPlayers, tournament }) => {
         return acc;
       }, {}),
     },
-    onSubmit: async (values) => {
+    onSubmit: async (values, { setSubmitting }) => {
       const homeTeamStats = Object.values(values.home_team).map((player) => ({
         player_participation: player.playerParticipationId,
         goals_scored: player.goals_scored,
@@ -98,6 +98,8 @@ export const MatchStatisticsForm = ({ matchPlayers, tournament }) => {
         }
       }catch(error){
         toast.error("Ocurrió un error en el registro: ", error);
+      }finally{
+        setSubmitting(false);
       }
     },
   });
@@ -289,7 +291,8 @@ export const MatchStatisticsForm = ({ matchPlayers, tournament }) => {
         <button
           type="button"
           onClick={formik.handleSubmit}
-          className="bg-indigo font-semibold text-white py-3 px-6 rounded-lg shadow-md hover:bg-indigo_dark transition ml-4"
+          className={`bg-indigo font-semibold text-white py-3 px-6 rounded-lg shadow-md hover:bg-indigo_dark transition ml-4 ${formik.isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+          disabled={formik.isSubmitting}
         >
           Guardar Estadísticas
         </button>

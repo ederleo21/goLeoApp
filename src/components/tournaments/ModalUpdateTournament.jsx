@@ -15,7 +15,7 @@ export const ModalUpdateTournament = ({ onClose, tournament, setTournament }) =>
     description: tournament.description,
   };
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values, { setSubmitting }) => {
     try {
       const formData = new FormData();
       Object.keys(values).forEach(key => {
@@ -35,6 +35,8 @@ export const ModalUpdateTournament = ({ onClose, tournament, setTournament }) =>
     } catch (err) {
       console.error("Error al actualizar el torneo:", err);
       toast.error("Ocurrió un error al enviar los datos.");
+    }finally{
+      setSubmitting(false);
     }
   };
   
@@ -49,7 +51,7 @@ export const ModalUpdateTournament = ({ onClose, tournament, setTournament }) =>
         <h2 className="text-3xl font-bold text-indigo_dark text-center mb-2">Actualizar Torneo</h2>
         <p className="text-center text-slate-600 mb-6">Modifica la información general de este torneo</p>
         <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-          {({ setFieldValue }) => (
+          {({ setFieldValue, isSubmitting }) => (
             <Form className="space-y-6 text-black">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
@@ -125,7 +127,11 @@ export const ModalUpdateTournament = ({ onClose, tournament, setTournament }) =>
                 <button type="button" onClick={onClose} className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg shadow hover:bg-gray-400">
                   Cancelar
                 </button>
-                <button type="submit" className="px-4 py-2 bg-indigo text-white rounded-lg shadow hover:bg-indigo_dark">
+                <button 
+                 type="submit" 
+                 className={`px-4 py-2 bg-indigo text-white rounded-lg shadow hover:bg-indigo_dark ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                 disabled={isSubmitting}
+                 >
                   Guardar
                 </button>
               </div>

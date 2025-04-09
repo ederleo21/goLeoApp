@@ -26,7 +26,7 @@ export const ModalSelectPlayers = ({ match, playersHomeTeam, playersAwayTeam, lo
     return errors;
   };
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values, { setSubmitting }) => {
     const listPlayers = values.homePlayers.concat(values.awayPlayers);
     try {
       await api.post(`/tournaments/match/participations_players/`, {
@@ -38,6 +38,7 @@ export const ModalSelectPlayers = ({ match, playersHomeTeam, playersAwayTeam, lo
     }catch(error) {
       toast.error("Error al iniciar el torneo: ", error);
     }finally{
+      setSubmitting(false);
       onClose();
     }
   };
@@ -72,7 +73,7 @@ export const ModalSelectPlayers = ({ match, playersHomeTeam, playersAwayTeam, lo
           validate={validate}
           onSubmit={handleSubmit}
         >
-          {({ values, setFieldValue, errors, touched }) => (
+          {({ values, setFieldValue, errors, touched, isSubmitting }) => (
             <Form>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4">
                 {/* Club Local */}
@@ -206,7 +207,8 @@ export const ModalSelectPlayers = ({ match, playersHomeTeam, playersAwayTeam, lo
                 </button>
                 <button
                   type="submit"
-                  className="px-6 py-2 bg-indigo text-white rounded hover:bg-indigo_dark font-semibold"
+                  className={`px-6 py-2 bg-indigo text-white rounded hover:bg-indigo_dark font-semibold ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  disabled={isSubmitting}
                 >
                   Iniciar partido
                 </button>
