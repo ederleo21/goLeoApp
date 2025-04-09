@@ -70,7 +70,7 @@ export const PlayerForm = () => {
     active: true
   })
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values, { setSubmitting }) => {
     const formData = new FormData();
 
     for (const key in values) {
@@ -87,12 +87,14 @@ export const PlayerForm = () => {
     
     try {
       const response = await dispatch(createPlayer(formData));
-      setPreviewPlayer(response)
+      setPreviewPlayer(response);
       setPlayerId(response.id);
       setShowModal(true);
     } catch (error) {
       console.error('Error del servidor:', error.response?.data || error.message);
       toast.error('Error al crear el jugador');
+    } finally{
+      setSubmitting(false);
     }
   };
   
@@ -181,7 +183,7 @@ export const PlayerForm = () => {
         validationSchema={getvalidationSchema(players)}
         onSubmit={handleSubmit}
       >
-      {({ setFieldValue }) => (
+      {({ setFieldValue, isSubmitting }) => (
         <Form>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             
@@ -321,7 +323,8 @@ export const PlayerForm = () => {
           <div className="flex justify-center gap-3">
             <button
               type='submit'
-              className='px-4 py-2 bg-indigo hover:bg-blue-800 text-white font-semibold rounded-lg transition-colors"'
+              className={`px-4 py-2 bg-indigo hover:bg-blue-800 text-white font-semibold rounded-lg transition-colors ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+              disabled={isSubmitting}
             >Guardar</button>
           </div>
         </Form>
