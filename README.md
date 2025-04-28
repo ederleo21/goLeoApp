@@ -2,7 +2,7 @@
 
 ## 📋 Descripción
 Interfaz web de la plataforma GoLeo - Gestión de torneos futbolísticos.
-Permite a clubes y organizadores administrar de manera sencilla jugadores, torneos, partidos y estadísticas en tiempo real, mejorando la organización y la experiencia de los eventos deportivos.
+Permite la gestión integral de torneos de fútbol, incluyendo la administración de clubes, jugadores, partidos y estadísticas. 
 
 ## 🚀 Funcionalidades principales
 - Registro y gestión de clubes y jugadores
